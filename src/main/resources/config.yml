@@ -36,18 +36,18 @@ episodes:
 
 map:
     # The diameter of the map (not the radius!), in blocks.
-    size: 2000
+    size: 4000
 
     # "squared" or "circular". Affects the WorldBorder pre-configuration, and the
     # wall generator used.
     shape: "squared"
 
     wall:
-        height: 128
+        height: 150
         block:
             # The replaceAir block will be placed where there where some transparent blocks or trees before.
             # The replaceSolid one, where there was an other kind of block.
-            replaceAir: GLASS
+            replaceAir: BEDROCK
             replaceSolid: BEDROCK
 
     border:
@@ -63,12 +63,12 @@ map:
 
         # The amount of blocks a player may safely be outside the border before taking damage.
         # Only for the vanilla world border. Ignored else.
-        damagesBuffer: 5
+        damagesBuffer: 0
 
         # The amount of damage a player takes when outside the border plus the border buffer.
         # The damages delt is calculated by multiplying this amount by the number of blocks behind the buffer.
         # Only for the vanilla world border. Ignored else.
-        damagesAmount: 0.2
+        damagesAmount: 0
 
         # The warning distance that causes the screen to be tinted red when the player is within the specified
         # number of blocks from the border.
@@ -109,7 +109,7 @@ daylightCycle:
 
 
 scoreboard:
-    title: Kill the Patrick
+    title: OofGang UHC
     
     # Scoreboard displayed on the left of the screen
     enabled: true
@@ -203,67 +203,37 @@ before-start:
         clear: true
 
         # True to prevent users from using their inventory when the game is not started.
-        preventUsage: true
+        preventUsage: false
 
         # True to disable all the inventory points above for players with the uh.build permission.
         allowForBuilders: true
 
     teamSelector:
         # True to give to the players a team selector, opening the teams inventory GUI (same as /teams).
-        enabled: true
+        enabled: false
 
         # The item to use as the team selector. Right-clicking it will open the GUI.
-        item: NETHER_STAR
+        item: 
 
     # Displays the current team in the action bar before the game. Nothing is displayed if the player is
     # not in a team.
     teamInActionBar: true
 
-    enablePVP: false
+    enablePVP: true
 
 
 start:
     slow:
         delayBetweenTP: 3  # in seconds
         broadcastProgress: true  # Displays something like « Teleporting... (14/28) » in the action bar for every player.
-
-        cages:
-            # Instead of flying above the ground, if this is enabled, players will wait for the game start in
-            # cages, built in the material you want.
-            enabled: true
-
-            # The cage type. Can be:
-            # - team_color_transparent (stained glass using the team color, or white without color/for solo);
-            # - team_color_solid (the same with stained hardened clay);
-            # - custom (a custom block, configure the one to use after).
-            type: team_color_transparent
-
-            # If you selected “custom” before, write here the block you want to use. It can be any valid Material.
-            # You can use safely any falling block here, they will never fall.
-            customBlock:
-
-            # If true, the cages will be built completly, including the ceiling. Else, they will be open to the sky.
-            buildCeiling: false
-
-            # If true, the walls will be built using the block above. Else, using barrier blocks.
-            visibleWalls: true
-
-            # The internal square radius of the cage.
-            # With 0, you'll have a cage with one block to walk.
-            # With 1, you'll have a 3×3 cage.
-            # With 2, a 5×5 cage. Etc.
-            radius: 1
-
-            # The internal height of the cages, i.e. the height of the space available to the players inside the cage.
-            height: 3
-
+        
     sound:
         name: NONE
         volume: 1
         pitch: 1
 
     # Display a title to everyone when the game begins
-    displayTitle: true
+    displayTitle: false
 
     # Damages are enabled after this amount of time.
     # Cannot be less than 15 seconds, to avoid initial-fall-related problems.
@@ -276,7 +246,7 @@ start:
     # PVP is enabled after this amount of time.
     # If 0, enabled immediately.
     # Format: "mm", "mm:ss", "hh:mm:ss"
-    peacePeriod: 0
+    peacePeriod: 15:00
 
     # The hostile mobs will not be allowed to spawn on the surface during this amount of time after
     # the beginning of the game. This prevents mobs from lightning errors to cause deaths during the
@@ -305,11 +275,11 @@ death:
         pvpOnly: false
         
     give-xp-to-killer:
-        levels: 2  # set to 0 to disable
+        levels: 3  # set to 0 to disable
         onlyOtherTeam: true  # Give XP only if the player kills a player from another team?
         
     announcements:
-        lightning-strike: false
+        lightning-strike: true
         
         sound:
             name: WITHER_SPAWN
@@ -326,7 +296,7 @@ colorizeChat: true
 gameplay-changes:
     naturalRegeneration: false  # If true, the health will regenerate with food (just like in the default vanilla game).
 
-    weather: true  # If false, the "bad" weather (rain, thunder) is disabled.
+    weather: false  # If false, the "bad" weather (rain, thunder) is disabled.
     
     replaceGhastTearsWithGold: true
     craftGoldenMelonWithGoldBlock: true
@@ -334,7 +304,7 @@ gameplay-changes:
     craftGoldenAppleFromHead:
         fromHuman:
             do: true
-            numberCrafted: 2
+            numberCrafted: 1
             addLore: true
             craftNotchApple: false
         fromWither:
@@ -346,35 +316,35 @@ gameplay-changes:
     goldenApple:
         regeneration:
             # Half-hearts regenerated by one apple. Vanilla: normal 4, notch 180 (yes, 180).
-            normal: 4
+            normal: 2
             notch: 180
             fromNormalHead: 4
             fromNotchHead: 180
         
-        disableNotchApples: false
+        disableNotchApples: true
     
     disableEnderpearlsDamages: true
     
-    disableLevelIIPotions: false
+    disableLevelIIPotions: true
     
     witch:
-        disableNaturalSpawn: false
+        disableNaturalSpawn: true
         disableLightningSpawn: false  # from a villager
 
     rabbit:
-        killerRabbitSpawn: true
+        killerRabbitSpawn: false
         # When a rabbit spawns, it will be transformed into a Killer Rabbit following
         # this probability (between 0 and 1).
-        killerRabbitSpawnProbability: 0.05
+        killerRabbitSpawnProbability: 0
         # The rabbit will be named after this configuration point, except if empty - then, the
         # default vanilla name will be used ("The Killer Bunny").
-        killerRabbitName: "The Killer Rabbit of Caerbannog"
+        killerRabbitName: "ur probability of winning the game against Ispeedz"
     
     
     # If true a compass will show the nearest player, and the craft will be different.
     # Else, the craft will be standard and the compass will show the spawn point of the team/player (not the world spawn point).
     compass:
-        enabled: true
+        enabled: false
         
         # The special recipe is with an ingredient in the center, and then,
         # from the top, clockwise: iron, spider eye, iron, rotten flesh, iron, bone, iron, gunpowder.
@@ -387,46 +357,16 @@ gameplay-changes:
 
 
 teams-options:
-    canSeeFriendlyInvisibles: true
-    allowFriendlyFire: true
+    canSeeFriendlyInvisibles: false
+    allowFriendlyFire: false
     
     # 0 = unlimited.
-    maxPlayersPerTeam: 0
+    maxPlayersPerTeam: 2
     
     # Randoms colors for solo games and solo teams (i.e. all the teams generated when the game starts)?
     # If false, no color (aka white) used.
-    randomColors: true
-
-    # These options are related to the auto-generated banner of each team.
-    # This banner is used on the teams selector (if set to "banner"), and can be given to the
-    # players when the game starts.
-    banner:
-        shape:
-            writeLetter: true
-            addBorder: true
-        give:
-            placeOnSpawn: true   # Places the team banner on the spawn point.
-            giveInHotbar: false  # Gives a banner to each player.
-            giveInHead: false    # Places the banner on the head of each player.
-        shields:
-            addOnShields: true   # Crafted shields will have the team banner on them. MC 1.9+ only.
-
-
-    # Chat-based GUI to choose a team
-    gui:
-        # Display the players in each team, in the tooltip linked to the players count?
-        displayPlayersInTeams: true
-        
-        # Display the GUI when a player login out of any team?
-        autoDisplay: true
-        # Delay between the login and the display? (Seconds)
-        delay: 4
-
-    # Chest-based GUI to choose a team and manage the teams
-    chestGui:
-        display:
-            teamItem: "banner"        # Values: "banner", "glass", "glass_pane", "clay", "wool", "dye"
-            glowOnSelectedTeam: true  # Set to true to display an enchantment glow on the player team
+    randomColors: false
+  
     
     teamChat:
         # Forces disable the team-chat when the player die.
@@ -441,7 +381,7 @@ teams-options:
 
 hardcore-hearts:
     # Display hardcore hearts instead of normal ones?
-    display: true
+    display: false
     
     # If a player die, his client will display an hardcore Game Over screen, without a « Respawn » button.
     # But the player CAN respawn, by clicking « Leave server » and then, on the confirmation screen,
@@ -456,7 +396,7 @@ hardcore-hearts:
 # Avoid the interrogation about the ability to respawn, if hardcore hearts are enabled.
 auto-respawn:
     do: true
-    delay: 6  # seconds
+    delay: 3  # seconds
 
 
 
@@ -464,21 +404,21 @@ auto-respawn:
 finish:
     auto:
         do: true  # Execute /uh finish automatically a few seconds after the final death?
-        timeAfterLastDeath: 3  # The command will be executed this amount of seconds after the last death.
+        timeAfterLastDeath: 5  # The command will be executed this amount of seconds after the last death.
     
     message: true  # If true, the name of the winner(s) will be broadcasted.
     title: true    # If true, a title will display the winner(s) of the game.
 
     fireworks:
         enabled: true  # If true, some fireworks will be launched at the location of the winners.
-        duration: 10   # In seconds.
-        areaSize: 6    # The size of the square, centered on each player, where the fireworks will be launched.
+        duration: 8   # In seconds.
+        areaSize: 10    # The size of the square, centered on each player, where the fireworks will be launched.
 
 
 
 dynmap:
-    showSpawnLocations: true
-    showDeathLocations: true
+    showSpawnLocations: false
+    showDeathLocations: false
 
 
 
@@ -499,7 +439,9 @@ rules:
         onJoin: false
         onStart: true
     rules:
-        -
+        -no team killing you little boys
+        -no hacks/glitches (obviously)
+        -team with the first person you find (unless if you're me in that case use creative mode and fly away xd)
 
 
 
@@ -511,13 +453,16 @@ commands:
     # These commands are also executed when the server is reloaded.
     execute-server-start:
        #- exec: command args
-       #  delay: "40:00" (format: "mm", "mm:ss" or "hh:mm:ss". If invalid or not present, 0 seconds.)
+       #  delay: "0" (format: "mm", "mm:ss" or "hh:mm:ss". If invalid or not present, 0 seconds.)
        - 
     
     # Commands executed after the beginning of the game.
     # (The moment when /uh start or /uh start slow go is executed.)
     execute-start:
-       - 
+       - //Spread players: x z min_spread range respect_teams players. (- 50) to account for wall shadow)
+/spreadplayers 0 0 400 [radius - 50] false @a
+       - //Starting message
+/say §2 "The games have become! Remember, you are either the hunter, or the hunted. Best of luck!"
     
     # Commands executed after the end of the game.
     # (After the last kill, when only one team is left.)
@@ -538,10 +483,10 @@ protips:
         
     crafts:
         goldenHead: true        # ProTip: craft of golden apples with an head
-        compassEasy: true       # Protip: "easy" compass craft
-        compassMedium: true     # Protip: "medium" compass craft
-        compassHard: true       # Protip: "hard" compass craft
-        glisteringMelon: true   # Protip: glistering melon crafted with a gold block
+        compassEasy: false       # Protip: "easy" compass craft
+        compassMedium: false     # Protip: "medium" compass craft
+        compassHard: false       # Protip: "hard" compass craft
+        glisteringMelon: false   # Protip: glistering melon crafted with a gold block
         noEnchGoldenApple: true # Protip: enchanted golden apple disabled
     
     start:
